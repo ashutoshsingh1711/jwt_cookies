@@ -81,7 +81,7 @@ exports.login = async (req, res) => {
         role: userExist.role,
       };
 
-      const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
+         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
 
       // Convert the userExist document to a plain JavaScript object
       userExist = userExist.toObject();
@@ -89,7 +89,8 @@ exports.login = async (req, res) => {
       userExist.password = undefined;
 
       const options = {
-        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+        expires: new Date(Date.now() + 3000),
+        httpOnly:true,
       };
 
       const user = {
